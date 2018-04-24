@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 import Tkinter as tk
 
+from gui.api import generate_records
+
 
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -23,7 +25,5 @@ class StartPage(tk.Frame):
         get_list_button.pack(pady=3)
 
     def generate_list(self):
-        pass
+        generate_records()
 
-    def get_list(self):
-        pass

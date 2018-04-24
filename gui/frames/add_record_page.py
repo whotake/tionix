@@ -4,6 +4,9 @@ from __future__ import unicode_literals
 import Tkinter as tk
 import tkMessageBox
 
+import requests
+
+from gui.api import create_person
 
 class AddRecordPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -37,12 +40,12 @@ class AddRecordPage(tk.Frame):
             'first_name': self.first_name_entry.get(),
             'last_name': self.last_name_entry.get(),
             'middle_name': self.last_name_entry.get(),
-            'dob': self.dob_entry.get()
+            'date_of_birth': self.dob_entry.get()
         }
 
         response = self.make_api_call(data)
 
-        if response:
+        if response.status_code == requests.codes.created:
             tkMessageBox.showinfo("Успешно", "Объект создан")
         else:
             tkMessageBox.showerror("Ошибка", "Что-то пошло не так")
@@ -50,4 +53,4 @@ class AddRecordPage(tk.Frame):
         self.controller.show_frame("StartPage")
 
     def make_api_call(self, data):
-        return True
+        return create_person(data)

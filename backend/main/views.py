@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import json
+
 from django.conf import settings
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.mixins import CreateModelMixin
@@ -8,7 +10,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
 
-from .serializers import PersonSerializer
+from .serializers import PersonSerializer, json_serial
 from .models import Person
 
 
@@ -22,17 +24,13 @@ class PersonViewSet(
 
 class GeneratePersonList(APIView):
     def get(self, request):
-        persons = Person.objects.all()
+        persons = Person.objects.all().values(
+            'first_name', 'last_name', 'middle_name', 'date_of_birth'
+        )
 
         with open(settings.FILE_LOCATION, 'w') as to_export:
-            to_export.truncate(0)
-
-            for person in persons:
-                to_export.write('{0} {1} {2}\n'.format(
-                    person.first_name,
-                    person.last_name,
-                    person.middle_name
-                ))
+            json.dump(list(persons), to_export, sort_keys=True, indent=4,
+                      ensure_ascii=False, default=json_serial)
 
             to_export.close()
 
@@ -44,4 +42,4 @@ class RetrievePersonListFile(APIView):
         with open(settings.FILE_LOCATION, 'r') as data:
             content = data.read()
 
-        return Response(status=HTTP_200_OK, data=content)
+        return Response(status=HTTP_200_OK, data=json.loads(content))
