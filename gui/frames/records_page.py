@@ -25,7 +25,7 @@ class RecordsPage(tk.Frame):
         tk.Button(self, text='На главную', command=lambda: controller.show_frame("StartPage")).grid(row=6)
 
     def retrieve_data(self):
-        return retrieve_persons()
+        return retrieve_persons().json()
 
     def insert_data(self, data):
         for item in data:

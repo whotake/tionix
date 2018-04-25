@@ -32,7 +32,10 @@ class GeneratePersonList(APIView):
 
 class RetrievePersonListFile(APIView):
     def get(self, request):
-        with open(settings.FILE_LOCATION, 'r') as data:
-            content = data.read()
+        try:
+            with open(settings.FILE_LOCATION, 'r') as data:
+                content = data.read()
+        except IOError:
+            content = '{}'
 
         return Response(status=HTTP_200_OK, data=json.loads(content))

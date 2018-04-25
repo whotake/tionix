@@ -11,7 +11,7 @@ def create_person(data):
 
 
 def retrieve_persons():
-    return requests.get('{0}{1}'.format(API_URL, '/retrieve/')).json()
+    return requests.get('{0}{1}'.format(API_URL, '/retrieve/'))
 
 
 def generate_records():

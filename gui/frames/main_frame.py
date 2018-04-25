@@ -13,7 +13,7 @@ FRAMES = (StartPage, AddRecordPage, RecordsPage)
 
 
 class SampleApp(tk.Tk):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, frames, default_frame, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
 
         self.title_font = tkfont.Font(
@@ -29,7 +29,7 @@ class SampleApp(tk.Tk):
         container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-        for F in FRAMES:
+        for F in frames:
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
@@ -39,7 +39,7 @@ class SampleApp(tk.Tk):
             # will be the one that is visible.
             frame.grid(row=0, column=0, sticky="nsew")
 
-        self.show_frame("StartPage")
+        self.show_frame(default_frame)
 
     def show_frame(self, page_name):
         frame = self.frames[page_name]
