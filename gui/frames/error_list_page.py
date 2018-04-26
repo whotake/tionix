@@ -21,6 +21,9 @@ class ErrorListPage(tk.Frame):
         scroll = tk.Scrollbar(self, command=self.text_field.yview)
         self.text_field.configure(yscrollcommand=scroll.set)
         self.text_field.config(state='disabled')
+        tk.Button(self, text='Назад',
+                  command=lambda: controller.show_frame("StartPage")
+                  ).grid(row=2)
 
     def insert_data(self):
         data = ''

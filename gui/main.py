@@ -3,9 +3,9 @@ from __future__ import unicode_literals
 
 import logging
 import sys
+import tkMessageBox
 
 from gui.interface import GUI_FRAMES
-from gui.error import ERROR_APP_FRAMES
 from gui.settings import ERROR_FILE
 from gui.frames.main_frame import SampleApp
 
@@ -17,8 +17,8 @@ logger = logging.getLogger(__name__)
 def error_handler(exc_type, exc_value, exc_traceback):
     logger.error("Uncaught exception",
                  exc_info=(exc_type, exc_value, exc_traceback))
-    error_app = SampleApp(ERROR_APP_FRAMES, default_frame='ErrorPage')
-    error_app.mainloop()
+    tkMessageBox.showerror('Ошибка', 'Данные записаны в лог')
+
 
 sys.excepthook = error_handler
 

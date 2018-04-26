@@ -4,12 +4,7 @@ from __future__ import unicode_literals
 import Tkinter as tk
 import tkFont as tkfont
 
-from start_page import StartPage
-from add_record_page import AddRecordPage
-from records_page import RecordsPage
-
 LARGE_FONT = ("Verdana", 12)
-FRAMES = (StartPage, AddRecordPage, RecordsPage)
 
 
 class SampleApp(tk.Tk):

@@ -19,10 +19,14 @@ class StartPage(tk.Frame):
         get_list_button = tk.Button(self, text='Получить данные',
                                     command=lambda: controller.show_frame(
                                         "RecordsPage"))
+        error_list = tk.Button(self, text='Посмотреть лог ошибок',
+                               command=lambda: controller.show_frame(
+                                   "ErrorListPage"))
 
         generate_button.pack(pady=3)
         add_button.pack(pady=3)
         get_list_button.pack(pady=3)
+        error_list.pack(pady=3)
 
     def generate_list(self):
         generate_records()
