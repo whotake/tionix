@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 requests = "*"
 djangorestframework = "*"
-django = "==1.11"
+django = "==1.11.29"
 celery = "*"
 
 [dev-packages]
